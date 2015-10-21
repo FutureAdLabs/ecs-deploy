@@ -132,7 +132,7 @@ fi
 # - image
 # - tag
 # If a group is missing it will be an empty string
-imageRegex="^([a-zA-Z0-9.\-]+):?([0-9]+)?/([a-zA-Z0-9\-]+)/?([a-zA-Z0-9\-]+)?:?([a-zA-Z0-9\-\.]+)?$"
+imageRegex="^([a-zA-Z0-9.\-_]+):?([0-9]+)?/([a-zA-Z0-9\-_]+)/?([a-zA-Z0-9\-_]+)?:?([a-zA-Z0-9\-\._]+)?$"
 
 if [[ $IMAGE =~ $imageRegex ]]; then
   # Define variables from matching groups
@@ -158,7 +158,7 @@ if [[ $IMAGE =~ $imageRegex ]]; then
 
 else
   # check if using root level repo with format like mariadb or mariadb:latest
-  rootRepoRegex="^([a-zA-Z0-9\-]+):?([a-zA-Z0-9\.\-]+)?$"
+  rootRepoRegex="^([a-zA-Z0-9\-_]+):?([a-zA-Z0-9\.\-_]+)?$"
   if [[ $IMAGE =~ $rootRepoRegex ]]; then
     img=${BASH_REMATCH[1]}
     if [[ "x$img" == "x" ]]; then
