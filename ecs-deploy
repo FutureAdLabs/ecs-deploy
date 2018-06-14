@@ -218,7 +218,7 @@ aws ecs describe-task-definition --task-def $TASK_DEFINITION > def
 sed -i def -e "s|\"image\": \"${imageWithoutTag}.*\"|\"image\": \"${useImage}\"|"
 
 # Filter the def
-jq < def > newdef '.taskDefinition|{family: .family, volumes: .volumes, containerDefinitions: .containerDefinitions}'
+jq < def > newdef '.taskDefinition|{family: .family, taskRoleArn: .taskRoleArn, volumes: .volumes, containerDefinitions: .containerDefinitions}'
 
 # Register the new task definition, and store its ARN
 NEW_TASKDEF=`aws ecs register-task-definition --cli-input-json file://newdef | jq .taskDefinition.taskDefinitionArn | tr -d '"'`
